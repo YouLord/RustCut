@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111116" />
+    <title>RustCut — монтажная</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="svg-sprite"
+      aria-hidden="true"
+    >
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-4-4" />
+      </symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24">
+        <path
+          d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5z"
+        />
+      </symbol>
+      <symbol id="i-video" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="13" height="14" rx="2" />
+        <path d="m16 10 5-3v10l-5-3z" />
+      </symbol>
+      <symbol id="i-film" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4" />
+      </symbol>
+      <symbol id="i-music" viewBox="0 0 24 24">
+        <path d="M9 18V5l11-2v13M9 9l11-2" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="17" cy="16" r="3" />
+      </symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="6" height="6" rx="1" />
+        <rect x="14" y="4" width="6" height="6" rx="1" />
+        <rect x="4" y="14" width="6" height="6" rx="1" />
+        <rect x="14" y="14" width="6" height="6" rx="1" />
+      </symbol>
+      <symbol id="i-more" viewBox="0 0 24 24">
+        <circle cx="5" cy="12" r="1" />
+        <circle cx="12" cy="12" r="1" />
+        <circle cx="19" cy="12" r="1" />
+      </symbol>
+      <symbol id="i-external" viewBox="0 0 24 24">
+        <path d="M14 4h6v6M20 4l-9 9" />
+        <path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5" />
+      </symbol>
+      <symbol id="i-cursor" viewBox="0 0 24 24">
+        <path d="m5 3 14 9-7 1-3 7z" />
+      </symbol>
+      <symbol id="i-scissors" viewBox="0 0 24 24">
+        <circle cx="6" cy="6" r="2.5" />
+        <circle cx="6" cy="18" r="2.5" />
+        <path d="m8 7.5 12 10M8 16.5 20 6" />
+      </symbol>
+      <symbol id="i-undo" viewBox="0 0 24 24">
+        <path d="M9 7 5 11l4 4M5 11h8a6 6 0 0 1 6 6" />
+      </symbol>
+      <symbol id="i-redo" viewBox="0 0 24 24">
+        <path d="m15 7 4 4-4 4M19 11h-8a6 6 0 0 0-6 6" />
+      </symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24">
+        <path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" />
+      </symbol>
+      <symbol id="i-magnet" viewBox="0 0 24 24">
+        <path d="M6 3v8a6 6 0 0 0 12 0V3h-4v8a2 2 0 0 1-4 0V3zM6 7h4M14 7h4" />
+      </symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24">
+        <path
+          d="M4 9v6h4l5 4V5L8 9zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"
+        />
+      </symbol>
+      <symbol id="i-muted" viewBox="0 0 24 24">
+        <path d="M4 9v6h4l5 4V5L8 9zM17 9l4 6M21 9l-4 6" />
+      </symbol>
+      <symbol id="i-previous" viewBox="0 0 24 24">
+        <path d="M6 5v14M19 5 9 12l10 7z" />
+      </symbol>
+      <symbol id="i-next" viewBox="0 0 24 24">
+        <path d="M18 5v14M5 5l10 7-10 7z" />
+      </symbol>
+      <symbol id="i-stepback" viewBox="0 0 24 24">
+        <path d="M7 6v12M18 6 9 12l9 6z" />
+      </symbol>
+      <symbol id="i-stepforward" viewBox="0 0 24 24">
+        <path d="M17 6v12M6 6l9 6-9 6z" />
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <path d="m9 5 11 7-11 7z" fill="currentColor" stroke="none" />
+      </symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24">
+        <path
+          d="M8 5h3v14H8zM14 5h3v14h-3z"
+          fill="currentColor"
+          stroke="none"
+        />
+      </symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z" />
+        <circle cx="12" cy="12" r="2.5" />
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect x="5" y="10" width="14" height="10" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24">
+        <path d="M4 7h9m4 0h3M4 17h3m4 0h9" />
+        <circle cx="15" cy="7" r="2" />
+        <circle cx="9" cy="17" r="2" />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M12 3v12m-4-4 4 4 4-4M4 17v3h16v-3" />
+      </symbol>
+      <symbol id="i-save" viewBox="0 0 24 24">
+        <path d="M5 3h12l3 3v14H4V3h1zM8 3v6h8V3M8 20v-7h8v7" />
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6" />
+      </symbol>
+      <symbol id="i-help" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M9.8 9a2.4 2.4 0 1 1 3.8 2c-1.1.8-1.6 1.3-1.6 2.5M12 17h.01" />
+      </symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol>
+    </svg>
+    <div class="app">
+      <header class="titlebar">
+        <div class="brand" aria-label="RustCut">
+          <span class="brand-mark"
+            ><svg viewBox="0 0 28 28" aria-hidden="true">
+              <path
+                d="M6 20V8h8.5c2.6 0 4 1.3 4 3.4 0 1.7-.9 2.8-2.5 3.2l3.4 5.4h-4l-3-5h-3v5zM9.4 10.8v1.8h4.5c.8 0 1.2-.3 1.2-.9s-.4-.9-1.2-.9z"
+                fill="currentColor"
+              />
+              <path
+                d="M20 5v4M18 7h4"
+                stroke="currentColor"
+                stroke-width="1.4"
+              /></svg
+          ></span>
+          <span class="brand-name">rust<span>cut</span></span
+          ><span class="alpha-label">ALPHA</span>
+        </div>
+        <nav class="menu" aria-label="Меню приложения">
+          <button disabled title="В разработке">Файл</button
+          ><button disabled title="В разработке">Правка</button
+          ><button disabled title="В разработке">Клип</button
+          ><button disabled title="В разработке">Последовательность</button
+          ><button disabled title="В разработке">Вид</button>
+        </nav>
+        <div class="titlebar-right">
+          <span class="engine-label"
+            ><span class="status-dot"></span> RUST ENGINE <b>01</b></span
+          ><button
+            id="helpButton"
+            class="icon-button help-button"
+            title="Горячие клавиши"
+            aria-label="Горячие клавиши"
+          >
+            <svg><use href="#i-help" /></svg></button
+          ><span class="avatar">RC</span>
+        </div>
+      </header>
+
+      <div class="workspace-bar">
+        <div class="project-title">
+          <span class="project-icon"
+            ><svg><use href="#i-folder" /></svg
+          ></span>
+          <div>
+            <span class="eyebrow">ПРОЕКТ / 01</span
+            ><strong id="projectName">North Atlantic</strong>
+          </div>
+          <svg class="down-icon"><use href="#i-down" /></svg>
+        </div>
+        <nav class="workspace-tabs" aria-label="Рабочие пространства">
+          <button class="active">Монтаж</button
+          ><button disabled title="В разработке">Цвет</button
+          ><button disabled title="В разработке">Звук</button
+          ><button disabled title="В разработке">Эффекты</button>
+        </nav>
+        <div class="workspace-actions">
+          <span class="session-label" id="saveStatus"
+            ><span></span> Не сохранено</span
+          ><button
+            class="save-button"
+            id="saveButton"
+            title="Сохранить проект на сервере (Ctrl+S)"
+          >
+            <svg><use href="#i-save" /></svg><span>Сохранить</span></button
+          ><button class="export-button" id="exportButton">
+            <svg><use href="#i-external" /></svg><span>Экспорт</span>
+          </button>
+        </div>
+      </div>
+
+      <main class="editor">
+        <div class="upper-grid">
+          <section class="panel media-panel" aria-label="Медиатека">
+            <div class="panel-header">
+              <div class="panel-heading">
+                <span class="panel-active">МЕДИАТЕКА</span
+                ><span class="count" id="assetCount">00</span>
+              </div>
+              <button
+                id="importIcon"
+                class="icon-button panel-icon"
+                title="Импортировать файлы"
+                aria-label="Импортировать файлы"
+              >
+                <svg><use href="#i-plus" /></svg>
+              </button>
+            </div>
+            <div class="media-content">
+              <div class="breadcrumb">
+                <svg><use href="#i-folder" /></svg><span>ПРОЕКТ</span
+                ><svg class="crumb-arrow"><use href="#i-chevron" /></svg
+                ><span>ВСЕ МЕДИА</span>
+              </div>
+              <div class="media-title">
+                <div>
+                  <h2>Медиа проекта</h2>
+                  <p>Ваши исходные материалы</p>
+                </div>
+                <button
+                  class="icon-button search-toggle"
+                  id="searchToggle"
+                  aria-label="Поиск медиа"
+                  title="Поиск медиа"
+                >
+                  <svg><use href="#i-search" /></svg>
+                </button>
+              </div>
+              <label class="search-field hidden" id="searchWrap"
+                ><svg><use href="#i-search" /></svg
+                ><input
+                  id="mediaSearch"
+                  placeholder="Найти файл"
+                  autocomplete="off"
+              /></label>
+              <div class="media-grid" id="mediaGrid"></div>
+              <button class="import-tile" id="importButton">
+                <span class="import-plus"
+                  ><svg><use href="#i-plus" /></svg></span
+                ><span
+                  ><strong>Импортировать медиа</strong
+                  ><small>или перетащите файлы сюда</small></span
+                >
+              </button>
+              <input
+                type="file"
+                id="fileInput"
+                accept="video/*,audio/*,.mkv,.m4a,.mov"
+                multiple
+                hidden
+              />
+            </div>
+            <div class="panel-footer">
+              <div>
+                <svg><use href="#i-grid" /></svg><span>Плитка</span>
+              </div>
+              <span id="mediaTotal">0 файлов</span>
+            </div>
+          </section>
+
+          <section class="panel monitor-panel" aria-label="Монитор программы">
+            <div class="panel-header monitor-header">
+              <div class="panel-heading">
+                <span class="panel-active">ПРОГРАММА</span
+                ><span class="header-divider"></span
+                ><span class="panel-subtitle" id="monitorSequence"
+                  >North Atlantic</span
+                >
+              </div>
+              <div class="monitor-badge"><span></span> ПРЕДПРОСМОТР</div>
+            </div>
+            <div class="monitor-stage">
+              <div class="monitor-frame" id="monitorFrame">
+                <video id="programVideo" playsinline preload="auto"></video>
+                <div class="monitor-empty" id="monitorEmpty">
+                  <svg><use href="#i-film" /></svg
+                  ><span>Здесь появится видео</span
+                  ><small>Добавьте клип на видеодорожку</small>
+                </div>
+                <div class="frame-tag" id="frameTag">
+                  <span class="frame-tag-dot"></span> ПРОГРАММА
+                  <span class="tag-divider"></span> 01
+                </div>
+              </div>
+            </div>
+            <div class="playback-bar">
+              <div class="monitor-time" id="monitorTime">00:00:00:00</div>
+              <div class="transport">
+                <button
+                  class="icon-button"
+                  id="goStart"
+                  aria-label="В начало"
+                  title="В начало"
+                >
+                  <svg><use href="#i-previous" /></svg></button
+                ><button
+                  class="icon-button"
+                  id="stepBack"
+                  aria-label="На кадр назад"
+                  title="На кадр назад (←)"
+                >
+                  <svg><use href="#i-stepback" /></svg></button
+                ><button
+                  class="play-button"
+                  id="playButton"
+                  aria-label="Воспроизвести"
+                  title="Воспроизвести (пробел)"
+                >
+                  <svg><use href="#i-play" /></svg></button
+                ><button
+                  class="icon-button"
+                  id="stepForward"
+                  aria-label="На кадр вперёд"
+                  title="На кадр вперёд (→)"
+                >
+                  <svg><use href="#i-stepforward" /></svg></button
+                ><button
+                  class="icon-button"
+                  id="goEnd"
+                  aria-label="В конец"
+                  title="В конец"
+                >
+                  <svg><use href="#i-next" /></svg>
+                </button>
+              </div>
+              <div class="monitor-tools">
+                <span class="monitor-resolution"
+                  >Вписать <svg><use href="#i-down" /></svg></span
+                ><button
+                  class="icon-button"
+                  id="muteButton"
+                  title="Выключить звук"
+                  aria-label="Выключить звук"
+                >
+                  <svg><use href="#i-volume" /></svg>
+                </button>
+              </div>
+            </div>
+            <div class="monitor-footer">
+              <span><span class="purple-dot"></span> ТАЙМЛАЙН АКТИВЕН</span
+              ><span
+                >1280 × 720 <span class="footer-separator">/</span> 25 FPS</span
+              >
+            </div>
+            <audio id="programAudio" preload="auto"></audio>
+          </section>
+
+          <aside class="panel inspector-panel" aria-label="Параметры клипа">
+            <div class="panel-header">
+              <div class="panel-heading">
+                <span class="panel-active">ПАРАМЕТРЫ</span>
+              </div>
+              <svg class="header-sliders"><use href="#i-sliders" /></svg>
+            </div>
+            <div class="inspector-content">
+              <div class="section-kicker">
+                <span>ВЫБРАННЫЙ КЛИП</span
+                ><span class="live-pill"><span></span> АКТИВЕН</span>
+              </div>
+              <div class="selected-card" id="selectedCard"></div>
+              <div class="properties-title">
+                <span
+                  ><svg><use href="#i-down" /></svg> Свойства клипа</span
+                ><span class="property-index">01</span>
+              </div>
+              <dl class="properties" id="properties"></dl>
+              <div class="inspector-divider"></div>
+              <div class="properties-title subtle">
+                <span
+                  ><svg><use href="#i-down" /></svg> Инструменты монтажа</span
+                >
+              </div>
+              <div class="tip-card">
+                <span class="tip-icon"
+                  ><svg><use href="#i-scissors" /></svg
+                ></span>
+                <div>
+                  <strong>Разрезать клип</strong>
+                  <p>Поставьте курсор на таймлайне и нажмите <kbd>C</kbd></p>
+                </div>
+              </div>
+              <div class="up-next">
+                <span>ДАЛЬШЕ В ПЛАНАХ</span>
+                <div><span>Эффекты и цвет</span><small>СКОРО</small></div>
+              </div>
+            </div>
+            <div class="inspector-bottom">
+              <span class="status-dot"></span> ДВИЖОК ГОТОВ <span>v0.1</span>
+            </div>
+          </aside>
+        </div>
+
+        <section class="panel timeline-panel" aria-label="Таймлайн">
+          <div class="timeline-titlebar">
+            <div class="timeline-title">
+              <span class="timeline-icon"
+                ><svg><use href="#i-film" /></svg
+              ></span>
+              <div>
+                <strong id="timelineName">North Atlantic</strong
+                ><span>ПОСЛЕДОВАТЕЛЬНОСТЬ 01</span>
+              </div>
+              <span class="timeline-title-active"></span>
+            </div>
+            <div class="timeline-meta">
+              <span>1280 × 720</span><i></i><span>25 FPS</span><i></i
+              ><span>СТЕРЕО</span>
+            </div>
+            <div class="timeline-time" id="timelineTime">00:00:00:00</div>
+          </div>
+          <div class="timeline-toolbar">
+            <div class="toolbar-group">
+              <button
+                class="tool-button selected"
+                id="selectButton"
+                title="Выделение и перемещение"
+                aria-label="Выделение и перемещение"
+              >
+                <svg><use href="#i-cursor" /></svg></button
+              ><button
+                class="tool-button"
+                id="splitButton"
+                title="Разрезать выбранный клип по курсору (C)"
+                aria-label="Разрезать клип"
+              >
+                <svg><use href="#i-scissors" /></svg></button
+              ><span class="tool-divider"></span
+              ><button
+                class="tool-button"
+                id="undoButton"
+                title="Отменить (Ctrl+Z)"
+                aria-label="Отменить"
+              >
+                <svg><use href="#i-undo" /></svg></button
+              ><button
+                class="tool-button"
+                id="redoButton"
+                title="Повторить (Ctrl+Shift+Z)"
+                aria-label="Повторить"
+              >
+                <svg><use href="#i-redo" /></svg></button
+              ><button
+                class="tool-button"
+                id="deleteButton"
+                title="Удалить выбранный клип (Delete)"
+                aria-label="Удалить клип"
+              >
+                <svg><use href="#i-trash" /></svg></button
+              ><span class="tool-divider"></span
+              ><button
+                class="tool-button snap-active"
+                id="snapButton"
+                title="Привязка к границам клипов"
+                aria-label="Привязка"
+                aria-pressed="true"
+              >
+                <svg><use href="#i-magnet" /></svg></button
+              ><span class="tool-caption">ПРИВЯЗКА</span>
+            </div>
+            <div class="toolbar-right">
+              <span class="zoom-label">МАСШТАБ</span
+              ><button
+                class="zoom-button"
+                id="zoomOut"
+                aria-label="Уменьшить масштаб"
+              >
+                <svg><use href="#i-minus" /></svg></button
+              ><input
+                id="zoomSlider"
+                type="range"
+                min="35"
+                max="160"
+                value="82"
+                aria-label="Масштаб таймлайна"
+              /><button
+                class="zoom-button"
+                id="zoomIn"
+                aria-label="Увеличить масштаб"
+              >
+                <svg><use href="#i-plus" /></svg></button
+              ><span id="zoomValue">100%</span>
+            </div>
+          </div>
+          <div class="timeline-area">
+            <div class="track-labels">
+              <div class="label-ruler">
+                <span>ДОРОЖКИ</span><svg><use href="#i-more" /></svg>
+              </div>
+              <div class="track-label empty-track">
+                <span class="track-kind">V2</span><span>Видео 2</span
+                ><svg><use href="#i-eye" /></svg
+                ><svg><use href="#i-lock" /></svg>
+              </div>
+              <div class="track-label video-track">
+                <span class="track-kind">V1</span><span>Видео 1</span
+                ><svg><use href="#i-eye" /></svg
+                ><svg><use href="#i-lock" /></svg>
+              </div>
+              <div class="track-label audio-track">
+                <span class="track-kind">A1</span><span>Аудио 1</span
+                ><svg><use href="#i-volume" /></svg
+                ><svg><use href="#i-lock" /></svg>
+              </div>
+              <div class="track-label empty-track">
+                <span class="track-kind">A2</span><span>Аудио 2</span
+                ><svg><use href="#i-volume" /></svg
+                ><svg><use href="#i-lock" /></svg>
+              </div>
+            </div>
+            <div class="timeline-scroll" id="timelineScroll">
+              <div class="timeline-canvas" id="timelineCanvas">
+                <div
+                  class="ruler"
+                  id="ruler"
+                  aria-label="Линейка времени"
+                ></div>
+                <div class="lane lane-empty" data-track="V2"></div>
+                <div
+                  class="lane lane-video"
+                  data-track="V1"
+                  id="videoLane"
+                ></div>
+                <div
+                  class="lane lane-audio"
+                  data-track="A1"
+                  id="audioLane"
+                ></div>
+                <div class="lane lane-empty" data-track="A2"></div>
+                <div class="playhead" id="playhead">
+                  <div class="playhead-cap"></div>
+                  <div class="playhead-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-bottom">
+            <span
+              ><span class="purple-dot"></span>
+              <span id="clipCount">0 КЛИПОВ</span></span
+            ><span>ПРОДОЛЖИТЕЛЬНОСТЬ <b id="durationTime">00:00:00:00</b></span
+            ><span class="timeline-hint"
+              >ПРОБЕЛ — ВОСПРОИЗВЕСТИ <i></i> C — РАЗРЕЗАТЬ</span
+            >
+          </div>
+        </section>
+      </main>
+      <footer class="statusbar">
+        <div>
+          <span class="status-dot"></span
+          ><span id="engineStatus">Подключение к Rust-ядру...</span
+          ><span class="statusbar-divider"></span><span>ПРОТОТИП 0.1</span>
+        </div>
+        <div>
+          <span id="footerSave">ПРОЕКТ НЕ СОХРАНЁН</span
+          ><span class="statusbar-divider"></span
+          ><span>СОЗДАНО ДЛЯ МОНТАЖА</span>
+        </div>
+      </footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog id="helpDialog">
+      <div class="dialog-top">
+        <div>
+          <span class="eyebrow">RUSTCUT / СПРАВКА</span>
+          <h2>Быстрые клавиши</h2>
+        </div>
+        <button class="icon-button" id="closeHelp" aria-label="Закрыть">
+          ×
+        </button>
+      </div>
+      <div class="shortcut-list">
+        <div><span>Воспроизвести / пауза</span><kbd>Пробел</kbd></div>
+        <div><span>Разрезать выбранный клип</span><kbd>C</kbd></div>
+        <div><span>Удалить выбранный клип</span><kbd>Delete</kbd></div>
+        <div><span>Перейти на кадр</span><kbd>← / →</kbd></div>
+        <div>
+          <span>Отменить / повторить</span><kbd>Ctrl Z / Ctrl Shift Z</kbd>
+        </div>
+        <div><span>Сохранить проект</span><kbd>Ctrl S</kbd></div>
+      </div>
+      <p>
+        Перетащите клип, чтобы переместить его. Потяните за край, чтобы
+        обрезать. Дважды нажмите на файл в медиатеке, чтобы добавить его на
+        таймлайн.
+      </p>
+      <p class="dialog-note">
+        Это независимый прототип, а не Adobe Premiere Pro. Кнопка «Сохранить»
+        записывает проект и ссылки на медиа на сервере, где запущен RustCut.
+      </p>
+    </dialog>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
